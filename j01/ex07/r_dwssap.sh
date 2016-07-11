@@ -1,0 +1,1 @@
+cat /etc/passwd | grep -v '^#' | sed -e 'N;s/^.*\n//' | sed 's/:.*//' | rev | sort -r | sed -n $(($FT_LINE1-0)),$(($FT_LINE2-0))p | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/, /g' | sed 's/$/./' | tr -d '\n'

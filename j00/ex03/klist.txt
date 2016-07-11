@@ -1,0 +1,6 @@
+Credentials cache: API:18023
+        Principal: fjuhel@42.FR
+
+  Issued                Expires               Principal
+Jul  4 14:59:57 2016  Jul  5 00:59:57 2016  krbtgt/42.FR@42.FR
+Jul  4 15:08:22 2016  Jul  5 00:59:57 2016  host/vgs-fn1.42.fr@42.FR

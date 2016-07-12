@@ -10,17 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
-int main()
+int	ft_atoi(char *str)
 {
-	printf("1 => %d\n",ft_atoi("- 1")); //return 0
-	printf("2 => %d\n",ft_atoi(" +3")); //return 3
-	printf("3 => %d\n",ft_atoi(" 0006")); //return 6
-	printf("4 => %d\n",ft_atoi("8-2")); //return 8
-	printf("5 => %d\n",ft_atoi("  1254]")); //return 1254
-	printf("6 => %d\n",ft_atoi("[1")); //return 0
-	printf("7 => %d\n",ft_atoi("")); //return 0
-	printf("8 => %d\n",ft_atoi(" ")); //return 0
+	int	i;
+	int	neg;
+	int	n;
+
+	i = 0;
+	neg = 0;
+	n = 0;
+	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n')
+		|| (str[i] == '\v') || (str[i] == '\f') || (str[i] == '\r'))
+		i++;
+	if (str[i] == 45)
+		neg = 1;
+	if ((str[i] == 45) || (str[i] == 43))
+		i++;
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		n *= 10;
+		n += ((int)str[i] - 48);
+		i++;
+	}
+	if (neg == 1)
+		return (-n);
+	else
+		return (n);
 }

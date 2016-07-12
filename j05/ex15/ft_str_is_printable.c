@@ -23,20 +23,3 @@ int		ft_str_is_printable(char *str)
 	}
 	return (1);
 }
-
-#include <stdio.h>
-int main()
-{
-	char str1[] = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
-	char str2[] = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
-	char str3[] = "";
-	char str4[] = "\0";
-
-	printf("%d\n", ft_str_is_printable(str1));
-	printf("%d\n", ft_str_is_printable(str2));
-	printf("%d\n", ft_str_is_printable(str3));
-	printf("%d\n", ft_str_is_printable(str4));
-	return 0;
-}
-
-

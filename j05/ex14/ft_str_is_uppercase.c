@@ -23,17 +23,3 @@ int		ft_str_is_uppercase(char *str)
 	}
 	return (1);
 }
-
-#include <stdio.h>
-int main()
-{
-	char str1[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	char str2[] = "ABCDEFGHIJKL@[MNOPQRSTUVWXYZ";
-	char str3[] = "";
-
-	printf("%d\n", ft_str_is_uppercase(str1));
-	printf("%d\n", ft_str_is_uppercase(str2));
-	printf("%d\n", ft_str_is_uppercase(str3));
-	return 0;
-}
-

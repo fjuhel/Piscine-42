@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 char *ft_strstr(char *str, char *to_find)
 {
 	int i;
@@ -34,19 +32,4 @@ char *ft_strstr(char *str, char *to_find)
 		i++;
 	}
 	return (0);
-}
-
-/* strstr example */
-#include <stdio.h>
-#include <string.h>
-
-int main ()
-{
-  char str[] ="This is a simple string";
-  char * pch1;
-  char * pch2;
-  pch1 = strstr (str,"");
-  pch2 = ft_strstr(str,"");
-  printf("%s  |  %s", pch1, pch2);
-  return 0;
 }

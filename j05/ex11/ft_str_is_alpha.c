@@ -23,16 +23,3 @@ int		ft_str_is_alpha(char *str)
 	}
 	return (1);
 }
-
-#include <stdio.h>
-int main()
-{
-	char str1[] = "abyzABYZ";
-	char str2[] = "abyz@[`{ABYZ";
-	char str3[] = "";
-
-	printf("%d\n", ft_str_is_alpha(str1));
-	printf("%d\n", ft_str_is_alpha(str2));
-	printf("%d\n", ft_str_is_alpha(str3));
-	return 0;
-}

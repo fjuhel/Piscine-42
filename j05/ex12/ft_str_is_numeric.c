@@ -23,16 +23,3 @@ int		ft_str_is_numeric(char *str)
 	}
 	return (1);
 }
-
-#include <stdio.h>
-int main()
-{
-	char str1[] = "0123456789";
-	char str2[] = "01234/:56789";
-	char str3[] = "";
-
-	printf("%d\n", ft_str_is_numeric(str1));
-	printf("%d\n", ft_str_is_numeric(str2));
-	printf("%d\n", ft_str_is_numeric(str3));
-	return 0;
-}

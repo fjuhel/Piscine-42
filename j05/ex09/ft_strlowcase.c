@@ -23,17 +23,3 @@ char *ft_strlowcase(char *str)
 	}
 	return (str);
 }
-
-#include <stdio.h>
-int main()
-{
-	char s1[] = "BaObAb";
-	char s2[] = "BI()&$@BLO[22";
-
-	printf("%s  ->  %s\n", s1, ft_strlowcase(s1));
-	printf("%s  ->  %s\n", s2, ft_strlowcase(s2));
-	return (0);
-}
-
-
-

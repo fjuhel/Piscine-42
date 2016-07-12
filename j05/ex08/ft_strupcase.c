@@ -23,14 +23,3 @@ char *ft_strupcase(char *str)
 	}
 	return (str);
 }
-
-#include <stdio.h>
-int main()
-{
-	char s1[] = "BaObAb";
-	char s2[] = "bi`()&$@Blo2{2";
-
-	printf("%s  ->  %s\n", s1, ft_strupcase(s1));
-	printf("%s  ->  %s\n", s2, ft_strupcase(s2));
-	return (0);
-}

@@ -18,61 +18,119 @@ void	ft_putchar(char c)
 	write(1,&c,1);
 }
 
-void	find_and_replace(char *src, char *base)
+int	ft_strlen(char *str)
 {
 	int i;
 
-	while (*src != '\0')
+	i = 0;
+	while (str[i] != '\0')
 	{
-		i = 0;
-		while (base[i] != '\0')
-		{
-			if (*src == i)
-				*src++ = base[i++];
-		}
+		i++;
 	}
+	return (i);
 }
-
 
 void	ft_putnbr_base(int nbr, char *base)
 {
-	unsigned int n;
+  int	result;
+  int	diviseur;
+  int	size_base;
 
-	n = nbr;
-	if (nbr < 0)
-	{
-		ft_putchar('-');
-		n = -nbr;
-	}
-	if (n > 9)
-	{
-		ft_putnbr_base(n / 10, base);
-		ft_putnbr_base(n % 10, base);
-	}
-	else
-	{
-		ft_putchar(n + '0');
-	}
+  size_base = ft_strlen(base);
+  if (nbr < 0)
+    {
+      ft_putchar('-');
+      nbr = -nbr;
+    }
+  diviseur = 1;
+  while ((nbr/diviseur) >= size_base)
+    diviseur = diviseur * size_base;
+  while (diviseur > 0)
+    {
+      result = (nbr / diviseur) % size_base;
+      ft_putchar(base[result]);
+      diviseur = diviseur / size_base;
+    }
 }
 
-
-char Conv(int M, int N)
+int		check_base(char *base)
 {
-	if (M < N)
+	int	i;
+	int	z;
+
+	i = 0;
+	z = 0;
+	if (base[0] == '\0' || base[1] == '\0')
+		return (0);
+	while (base[i])
 	{
-		printf("%c -\n", M + '0');
-		return (M + '0'); 
+		z = i + 1;
+		if (base[i] == '+' || base[i] == '-')
+			return (0);
+		if (base[i] < 32 || base[i] > 126)
+			return (0);
+		while (base[z])
+		{
+			if (base[i] == base[z])
+				return (0);
+			z++;
+		}
+		i++;
 	}
-	else
-	{
-		printf("%c\n", (Conv(M/N, N) + (M % N) + '\0'));
-		return (Conv(M/N, N) + (M & N) + '\0');
-	}
+	return (1);
 }
 
+void	ft_putnbr_base2(int nbr, char *base)
+{
+	int	size_base;
+	int	nbr_final[100];
+	int	i;
+
+	i = 0;
+	size_base = 0;
+	if (check_base(base))
+	{
+		if (nbr < 0)
+		{
+			nbr = -nbr;
+			ft_putchar('-');
+		}
+		while (base[size_base])
+			size_base++;
+		while (nbr)
+		{
+			nbr_final[i] = nbr % size_base;
+			nbr = nbr / size_base;
+			i++;
+		}
+		while (--i >= 0)
+			ft_putchar(base[nbr_final[i]]);
+	}
+}
 
 
 int main()
 {
-	printf("%c\n", Conv(8,2));
+	int k = 123;
+	char base1[] = "01";
+	char base2[] = "0123456789ABCDEF";
+	char base3[] = "poneyvif";
+	char base4[] = "mrdoc";
+	ft_putnbr_base(k,base1);
+	ft_putchar('\n');
+	ft_putnbr_base(k,base2);
+	ft_putchar('\n');
+	ft_putnbr_base(k,base3);
+	ft_putchar('\n');
+	ft_putnbr_base(k,base4);
+	ft_putchar('\n');
+	ft_putchar('\n');
+	ft_putnbr_base2(k,base1);
+	ft_putchar('\n');
+	ft_putnbr_base2(k,base2);
+	ft_putchar('\n');
+	ft_putnbr_base2(k,base3);
+	ft_putchar('\n');
+	ft_putnbr_base2(k,base4);
+	return 0;
 }

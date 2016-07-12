@@ -29,17 +29,3 @@ char *ft_strcapitalize(char *str)
 	}
 	return (str);
 }
-
-#include <stdio.h>
-int main()
-{
-	char s1[] = "salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un";
-	char s2[] = "bI()&$@BLO[22";
-
-	printf("%s  ->", s1);
-	printf("%s\n",ft_strcapitalize(s1));
-	printf("%s  ->", s2);
-	printf("%s\n",ft_strcapitalize(s2));
-	return (0);
-}
-

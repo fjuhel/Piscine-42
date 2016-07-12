@@ -10,43 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 char * ft_strcat(char *dest, char *src)
 {
-	while (*dest != '\0')
-		dest++;
+	char *str;
+
+	str = dest; 
+	while (*str != '\0')
+		str++;
 	while (*src != '\0')
-		*dest++ = *src++;
-	*dest = '\0';
-	return (dest);
-}
-
-/* strcat example */
-#include <stdio.h>
-#include <string.h>
-
-void t1()
-{
-  char str[80];
-  strcpy (str,"these ");
-  strcat (str,"strings ");
-  strcat (str,"are ");
-  strcat (str,"concatenated.");
-  puts (str);
-}
-
-void t2()
-{
-  char str[80];
-  strcpy (str,"these ");
-  ft_strcat (str,"strings ");
-  ft_strcat (str,"are ");
-  ft_strcat (str,"concatenated.");
-  puts (str);
-}
-
-int main()
-{
-	t2();
-	return 0;
+		*str++ = *src++;
+	*str = '\0';
+	return (str);
 }

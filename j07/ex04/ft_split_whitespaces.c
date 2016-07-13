@@ -1,28 +1,18 @@
 #include <stdlib.h>
 #include <stdio.h>
-int	ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
 
 char **ft_split_whitespaces(char *str)
 {
 	int i;
 	int j;
 	int k;
+	int n;
 	char **dest;
 	char *tmp;
 
 	dest = malloc(sizeof(**dest) * 4 + 1);
 	i = 0;
+	n = 0;
 	while(str[i] != '\0')
 	{
 		j = 0;
@@ -30,7 +20,7 @@ char **ft_split_whitespaces(char *str)
 		while(str[i + j] != '\n' && str[i + j] != '\t'
 			&& str[i + j] != ' ' && str[i + j] != '\0')
 			j++;
-		printf("i = %d et j = %d\n", i, j);
+		//printf("i = %d et j = %d\n", i, j);
 		tmp = malloc(sizeof(*tmp) * j + 1);
 		
 		while (k < j)
@@ -38,14 +28,25 @@ char **ft_split_whitespaces(char *str)
 			tmp[k] = str[i + k];
 			k++;
 		}
-		printf("%s\n", tmp);
-		
-		tmp[k] = '\0';
-		dest[i] = tmp;
-		i += j;
-		i++;
+		if (tmp != "^D@")
+		{
+			printf("%d\n", tmp);
+			
+			tmp[k] = '\0';
+			printf("%s\n", tmp);
+			dest[n] = tmp;
+			printf("%s\n", dest[n]);
+			for(int z = 0; z < n + 1; z++)
+				printf("----------->%s\n", dest[z]);
+			i += j;
+			i++;
+			n++;
+		}
+		else
+			printf("Vamos a la playa\n");
+
 	}
-	dest[4 + 1] = '\0';
+	//dest[4 + 1] = '\0';
 	return (dest);
 }
 
@@ -53,12 +54,11 @@ char **ft_split_whitespaces(char *str)
 
 int main()
 {
-	char str[] = "Salut\nles\npetits\nmoutons.";
+	char str[] = "salut\nles\npetits\nmoutons";
 	char **list = ft_split_whitespaces(str);
-/*
-	for(int i = 0; i < 3 ; i++)
-		for (int j = 0; j<3; j++)
-			printf("%s\n", list[i][j]);
-*/
+
+	for(int i = 0; i < 5 ; i++)
+			printf("%s\n", list[i]);
+
 	return (0);
 }

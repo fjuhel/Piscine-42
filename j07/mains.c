@@ -36,20 +36,6 @@ int main()
 	return 0;
 }
 
-/* Test ex02 */
-#include <stdio.h>
-int main()
-{
-	int min = 0;
-	int max = 10;
-	int len;
-	int **tab;
-
-	len = ft_ultimate_range(tab, min, max);
-	printf("%d\n", len);
-	return 0;
-}
-
 /* Test ex03 */
 #include <stdio.h>
 int main()
@@ -65,5 +51,33 @@ int main()
 	arg[2] = arg3;
 	//printf("%d\n", compute_len(n, arg));
 	printf("%s\n", ft_concat_params(n, arg));
+	return 0;
+}
+
+/* Test ex04 */
+#include <stdio.h>
+int main()
+{
+	char str[] = "\n";
+	//char str[] = "Bonjour\n les  petits enfants\ttout\nmoches.";
+	char **super_str;
+	super_str = ft_split_whitespaces(str);
+	if (super_str == NULL)
+		printf("Perdu\n");
+	else
+		for(int i = 0; i<compute_nb_words(str);i++)
+			printf("%s\n", super_str[i]);
+	return 0;
+}
+
+/* Test ex06 */
+int main()
+{
+	char nbr[] = "10";
+	char base_from[] = "0123456789";
+	char base_to[] = "0123456789ABCDEF";
+
+	printf("%s\n", ft_convert_base(nbr, base_from, base_to));
+
 	return 0;
 }

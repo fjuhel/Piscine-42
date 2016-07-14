@@ -1,64 +1,107 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split_whitespaces.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/13 13:30:17 by fjuhel            #+#    #+#             */
+/*   Updated: 2016/07/13 13:30:17 by fjuhel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include <stdio.h>
 
-char **ft_split_whitespaces(char *str)
+int		compute_nb_words(char *str)
 {
-	int i;
-	int j;
-	int k;
+	int text;
 	int n;
-	char **dest;
-	char *tmp;
 
-	dest = malloc(sizeof(**dest) * 4 + 1);
-	i = 0;
 	n = 0;
-	while(str[i] != '\0')
+	text = 0;
+	while (*str)
 	{
-		j = 0;
-		k = 0;
-		while(str[i + j] != '\n' && str[i + j] != '\t'
-			&& str[i + j] != ' ' && str[i + j] != '\0')
-			j++;
-		//printf("i = %d et j = %d\n", i, j);
-		tmp = malloc(sizeof(*tmp) * j + 1);
-		
-		while (k < j)
-		{
-			tmp[k] = str[i + k];
-			k++;
-		}
-		if (tmp != "^D@")
-		{
-			printf("%d\n", tmp);
-			
-			tmp[k] = '\0';
-			printf("%s\n", tmp);
-			dest[n] = tmp;
-			printf("%s\n", dest[n]);
-			for(int z = 0; z < n + 1; z++)
-				printf("----------->%s\n", dest[z]);
-			i += j;
-			i++;
+		if ((*str == '\n' || *str == '\t' || *str == ' ')
+			&& (*(str + 1) != '\n' && *(str + 1) != '\t'
+				&& *(str + 1) != ' ' && *(str + 1) != '\0'))
 			n++;
-		}
-		else
-			printf("Vamos a la playa\n");
-
+		if (*str > 32 && *str < 127)
+			text = 1;
+		str++;
 	}
-	//dest[4 + 1] = '\0';
-	return (dest);
+	if (text == 0)
+		return (0);
+	return (n + 1);
 }
 
-/* Test ex04 */
-
-int main()
+int		ft_strlen(char *str)
 {
-	char str[] = "salut\nles\npetits\nmoutons";
-	char **list = ft_split_whitespaces(str);
+	int i;
 
-	for(int i = 0; i < 5 ; i++)
-			printf("%s\n", list[i]);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 
-	return (0);
+int		set(char *src, char *str, int start, int end)
+{
+	int		i;
+
+	i = 0;
+	if (str == NULL)
+		return (0);
+	while (i < end - start)
+	{
+		str[i] = src[start + i];
+		i++;
+	}
+	str[i] = '\0';
+	return (1);
+}
+
+int		intermediaire(char **dest, char *str, int i, int n)
+{
+	int j;
+
+	j = 0;
+	while (str[i + j] != '\n' && str[i + j] != '\t'
+		&& str[i + j] != ' ' && str[i + j] != '\0')
+		j++;
+	if (j > 0)
+	{
+		dest[n] = malloc(sizeof(**dest) * j + 1);
+		if (dest[n] == NULL)
+			return (-1);
+		set(str, dest[n], i, i + j);
+	}
+	return(j);
+}
+
+char	**ft_split_whitespaces(char *str)
+{
+	int		i;
+	int		j;
+	int		n;
+	char	**dest;
+	if (ft_strlen(str) == 0 || compute_nb_words(str) == 0)
+		return (NULL);
+	dest = malloc(sizeof(*dest) * compute_nb_words(str) + 1);
+	if (dest == NULL)
+		return (dest);
+	i = 0;
+	n = 0;
+	while (str[i] != '\0')
+	{
+		j = intermediaire(dest,str,i, n);
+		if (j == -1)
+			return (NULL);
+		else if(j > 0)
+			n++;
+		i += j + 1;
+	}
+	dest[n] = NULL;
+	return (dest);
 }

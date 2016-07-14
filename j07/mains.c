@@ -58,10 +58,10 @@ int main()
 #include <stdio.h>
 int main()
 {
-	char str[] = "\n";
-	//char str[] = "Bonjour\n les  petits enfants\ttout\nmoches.";
+	//char str[] = "\n";
+	char str[] = "Bonjour\n les  petits enfants\ttout\nmoches.";
 	char **super_str;
-	super_str = ft_split_whitespaces(str);
+	super_str = ft_split(str);
 	if (super_str == NULL)
 		printf("Perdu\n");
 	else

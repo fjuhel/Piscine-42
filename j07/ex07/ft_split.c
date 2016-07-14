@@ -11,19 +11,40 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 
-int		compute_nb_words(char *str)
+int 	find_split(char c, char *spliter)
+{
+	int i;
+
+	i = 0;
+	while (spliter[i] != '\0')
+	{
+		if (c == spliter[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int		cpt_nb_words_or_len(char *str, char *spliter, int words)
 {
 	int text;
 	int n;
 
 	n = 0;
 	text = 0;
+	if (words == 0)
+	{
+		while (str[n] != '\0')
+			n++;
+		return (n);
+	}
 	while (*str)
 	{
-		if ((*str == '\n' || *str == '\t' || *str == ' ')
-			&& (*(str + 1) != '\n' && *(str + 1) != '\t'
-				&& *(str + 1) != ' ' && *(str + 1) != '\0'))
+		if (find_split(*str, spliter) == 1
+			&& find_split(*(str + 1), spliter) == 0
+			&& *(str + 1) != '\0')
 			n++;
 		if (*str > 32 && *str < 127)
 			text = 1;
@@ -34,68 +55,48 @@ int		compute_nb_words(char *str)
 	return (n + 1);
 }
 
-int		ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-int		set(char *src, char *str, int start, int end)
-{
-	int		i;
-
-	i = 0;
-	if (str == NULL)
-		return (0);
-	while (i < end - start)
-	{
-		str[i] = src[start + i];
-		i++;
-	}
-	str[i] = '\0';
-	return (1);
-}
-
-int		intermediaire(char **dest, char *str, int i, int n)
+int		intermediaire(char **dest, char *str, char *spliter, int i, int n)
 {
 	int j;
-
+	int k;
 	j = 0;
-	while (str[i + j] != '\n' && str[i + j] != '\t'
-		&& str[i + j] != ' ' && str[i + j] != '\0')
+	while (find_split(str[i + j], spliter) == 0 && str[i + j] != '\0')
 		j++;
+	//printf("%d\n", j);
 	if (j > 0)
 	{
+		
 		dest[n] = malloc(sizeof(**dest) * j + 1);
 		if (dest[n] == NULL)
 			return (-1);
-		set(str, dest[n], i, i + j);
+		k = 0;
+		while (k < j)
+		{
+			dest[n][k] = str[i + k];
+			k++;
+		}
+		//printf("%s\n", dest[n]);
+		dest[n][k] = '\0';
 	}
 	return(j);
 }
 
-char	**ft_split(char *str)
+char	**ft_split(char *str, char *charset)
 {
 	int		i;
 	int		j;
 	int		n;
 	char	**dest;
-	if (ft_strlen(str) == 0 || compute_nb_words(str) == 0)
+	if (cpt_nb_words_or_len(str, charset, 0) == 0 || cpt_nb_words_or_len(str, charset, 1) == 0)
 		return (NULL);
-	dest = malloc(sizeof(*dest) * compute_nb_words(str) + 1);
+	dest = malloc(sizeof(*dest) * cpt_nb_words_or_len(str, charset, 1) + 1);
 	if (dest == NULL)
 		return (dest);
 	i = 0;
 	n = 0;
 	while (str[i] != '\0')
 	{
-		j = intermediaire(dest,str,i, n);
+		j = intermediaire(dest,str, charset, i, n);
 		if (j == -1)
 			return (NULL);
 		else if(j > 0)
@@ -106,3 +107,19 @@ char	**ft_split(char *str)
 	return (dest);
 }
 
+/* Test ex07 */
+#include <stdio.h>
+int main()
+{
+	//char str[] = "\n";
+	char str[] = "Bonjour\nles petits enfants\ttout\nmoches.";
+	char charset[] = "\n\t j";
+	char **super_str;
+	super_str = ft_split(str,charset);
+	if (super_str == NULL)
+		printf("Perdu\n");
+	else
+		for(int i = 0; i<cpt_nb_words_or_len(str, charset, 1);i++)
+			printf("%s\n", super_str[i]);
+	return 0;
+}

@@ -1,1 +1,0 @@
-ldapwhoami | sed 's/dn://'

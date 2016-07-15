@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftstrncpy.c                                        :+:      :+:    :+:   */
+/*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/11 12:40:23 by fjuhel            #+#    #+#             */
-/*   Updated: 2016/07/11 12:40:24 by fjuhel           ###   ########.fr       */
+/*   Created: 2016/07/14 16:53:04 by fjuhel            #+#    #+#             */
+/*   Updated: 2016/07/14 16:53:09 by fjuhel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
-{
-	char *str;
+#ifndef FT_H
+# define FT_H
 
-	str = dest;
-	while (n > 0 && *src != '\0')
-	{
-		*str++ = *src++;
-		--n;
-	}
-	while (n > 0)
-	{
-		*str++ = '\0';
-		--n;
-	}
-	return (dest);
-}
+void	ft_putchar(char c);
+void	ft_putstr(char *str);
+int		ft_strcmp(char *s1, char *s2);
+int		ft_strlen(char *str);
+void	ft_swap(int *a, int *b);
+
+#endif

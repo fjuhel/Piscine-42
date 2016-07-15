@@ -77,7 +77,7 @@ int		intermediaire(char **dest, char *str, int i, int n)
 			return (-1);
 		set(str, dest[n], i, i + j);
 	}
-	return(j);
+	return (j);
 }
 
 char	**ft_split_whitespaces(char *str)
@@ -86,6 +86,7 @@ char	**ft_split_whitespaces(char *str)
 	int		j;
 	int		n;
 	char	**dest;
+
 	if (ft_strlen(str) == 0 || compute_nb_words(str) == 0)
 		return (NULL);
 	dest = malloc(sizeof(*dest) * compute_nb_words(str) + 1);
@@ -95,10 +96,10 @@ char	**ft_split_whitespaces(char *str)
 	n = 0;
 	while (str[i] != '\0')
 	{
-		j = intermediaire(dest,str,i, n);
+		j = intermediaire(dest, str, i, n);
 		if (j == -1)
 			return (NULL);
-		else if(j > 0)
+		else if (j > 0)
 			n++;
 		i += j + 1;
 	}

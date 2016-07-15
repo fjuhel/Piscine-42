@@ -1,15 +1,21 @@
-int	ft_putchar(char c);
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_program_name.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/13 13:29:11 by fjuhel            #+#    #+#             */
+/*   Updated: 2016/07/13 13:29:14 by fjuhel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	main(int argc, char **argv)
+void	ft_putchar(char c);
+
+int		main(int argc, char **argv)
 {
-	int	i;
-
-	i = 0;
 	argc = 0;
-	while (argv[0][i])
-	{
-		ft_putchar(argv[0][i]);
-		i++;
-	}
+	while (*argv[0])
+		ft_putchar(*argv[0]++);
 	return (0);
 }

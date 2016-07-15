@@ -43,7 +43,7 @@ char	*ft_strcat(char *dest, char *src)
 
 char	*ft_concat_params(int argc, char **argv)
 {
-	int i;
+	int		i;
 	int		len;
 	char	*dest;
 
@@ -58,12 +58,6 @@ char	*ft_concat_params(int argc, char **argv)
 		if (i++ < argc - 1)
 			ft_strcat(dest, "\n");
 	}
-	dest[len + argc - 2] = '\0'; 
+	dest[len + argc - 2] = '\0';
 	return (dest);
-}
-#include <stdio.h>
-int main(int argc, char ** argv)
-{
-	printf("%s",ft_concat_params(argc, argv));
-	return 0;
 }

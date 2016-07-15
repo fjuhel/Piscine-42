@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftstrncpy.c                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/11 12:40:23 by fjuhel            #+#    #+#             */
-/*   Updated: 2016/07/11 12:40:24 by fjuhel           ###   ########.fr       */
+/*   Created: 2016/07/07 15:07:01 by fjuhel            #+#    #+#             */
+/*   Updated: 2016/07/07 15:07:03 by fjuhel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
+void	ft_swap(int *a, int *b)
 {
-	char *str;
+	int tmp;
 
-	str = dest;
-	while (n > 0 && *src != '\0')
-	{
-		*str++ = *src++;
-		--n;
-	}
-	while (n > 0)
-	{
-		*str++ = '\0';
-		--n;
-	}
-	return (dest);
+	tmp = *b;
+	*b = *a;
+	*a = tmp;
 }

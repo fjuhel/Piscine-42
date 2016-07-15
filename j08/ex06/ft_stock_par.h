@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftstrncpy.c                                        :+:      :+:    :+:   */
+/*   ft_stock_par.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/11 12:40:23 by fjuhel            #+#    #+#             */
-/*   Updated: 2016/07/11 12:40:24 by fjuhel           ###   ########.fr       */
+/*   Created: 2016/07/14 19:14:29 by fjuhel            #+#    #+#             */
+/*   Updated: 2016/07/14 19:14:30 by fjuhel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
-{
-	char *str;
+#ifndef FT_STOCK_PAR_H
+# define FT_STOCK_PAR_H
 
-	str = dest;
-	while (n > 0 && *src != '\0')
-	{
-		*str++ = *src++;
-		--n;
-	}
-	while (n > 0)
-	{
-		*str++ = '\0';
-		--n;
-	}
-	return (dest);
-}
+void			ft_putchar(char c);
+
+typedef struct	s_stock_par
+{
+	int		size_param;
+	char	*str;
+	char	*copy;
+	char	**tab;
+}				t_stock_par;
+
+#endif

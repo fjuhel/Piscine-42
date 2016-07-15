@@ -5,15 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/13 13:30:30 by fjuhel            #+#    #+#             */
-/*   Updated: 2016/07/13 13:30:31 by fjuhel           ###   ########.fr       */
+/*   Created: 2016/07/14 19:05:52 by fjuhel            #+#    #+#             */
+/*   Updated: 2016/07/14 19:05:54 by fjuhel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
-int 	find_split(char c, char *spliter)
+int		find_split(char c, char *spliter)
 {
 	int i;
 
@@ -55,17 +54,19 @@ int		cpt_nb_words_or_len(char *str, char *spliter, int words)
 	return (n + 1);
 }
 
-int		intermediaire(char **dest, char *str, char *spliter, int i, int n)
+int		intermediaire(char **dest, char *str, char *spliter, int n)
 {
+	int i;
 	int j;
 	int k;
+
+	i = n / 10000;
 	j = 0;
+	n = n - i * 10000;
 	while (find_split(str[i + j], spliter) == 0 && str[i + j] != '\0')
 		j++;
-	//printf("%d\n", j);
 	if (j > 0)
 	{
-		
 		dest[n] = malloc(sizeof(**dest) * j + 1);
 		if (dest[n] == NULL)
 			return (-1);
@@ -75,10 +76,19 @@ int		intermediaire(char **dest, char *str, char *spliter, int i, int n)
 			dest[n][k] = str[i + k];
 			k++;
 		}
-		//printf("%s\n", dest[n]);
 		dest[n][k] = '\0';
 	}
-	return(j);
+	return (j);
+}
+
+int		len(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
 
 char	**ft_split(char *str, char *charset)
@@ -87,39 +97,24 @@ char	**ft_split(char *str, char *charset)
 	int		j;
 	int		n;
 	char	**dest;
-	if (cpt_nb_words_or_len(str, charset, 0) == 0 || cpt_nb_words_or_len(str, charset, 1) == 0)
+
+	if (cpt_nb_words_or_len(str, charset, 0) == 0
+		|| cpt_nb_words_or_len(str, charset, 1) == 0)
 		return (NULL);
 	dest = malloc(sizeof(*dest) * cpt_nb_words_or_len(str, charset, 1) + 1);
 	if (dest == NULL)
 		return (dest);
 	i = 0;
 	n = 0;
-	while (str[i] != '\0')
+	while (i < len(str))
 	{
-		j = intermediaire(dest,str, charset, i, n);
+		j = intermediaire(dest, str, charset, i * 10000 + n);
 		if (j == -1)
 			return (NULL);
-		else if(j > 0)
+		else if (j > 0)
 			n++;
 		i += j + 1;
 	}
 	dest[n] = NULL;
 	return (dest);
-}
-
-/* Test ex07 */
-#include <stdio.h>
-int main()
-{
-	//char str[] = "\n";
-	char str[] = "Bonjour\nles petits enfants\ttout\nmoches.";
-	char charset[] = "\n\t j";
-	char **super_str;
-	super_str = ft_split(str,charset);
-	if (super_str == NULL)
-		printf("Perdu\n");
-	else
-		for(int i = 0; i<cpt_nb_words_or_len(str, charset, 1);i++)
-			printf("%s\n", super_str[i]);
-	return 0;
 }

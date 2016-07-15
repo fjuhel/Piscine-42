@@ -10,15 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// kbensado
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
 
 int		mypow(int nb, int power)
 {
@@ -32,38 +24,37 @@ int		mypow(int nb, int power)
 		return (nb * mypow(nb, power - 1));
 }
 
-int		fd(char *str, char to_find)
+int		ft(char *str, char to_find, int choix)
 {
 	int i;
 
 	i = 0;
-	while (str[i] != '\0')
+	if (choix == 0)
 	{
-		if (to_find == str[i])
-			return (i);
-		i++;
+		while (str[i] != '\0')
+		{
+			if (to_find == str[i])
+				return (i);
+			i++;
+		}
+		return (-1);
 	}
-	return (-1);
+	else
+	{
+		while (str[i] != '\0')
+		{
+			i++;
+		}
+		return (i);
+	}
 }
 
-int	len(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-int lenght_nbr(int nbr, int base_size)
+int		ln(int nbr, int base_size)
 {
 	int n;
 
 	n = 0;
-	while(nbr!= 0)
+	while (nbr != 0)
 	{
 		nbr /= base_size;
 		n++;
@@ -71,34 +62,45 @@ int lenght_nbr(int nbr, int base_size)
 	return (n);
 }
 
-char *ft_convert_base(char *nbr, char *base_from, char *base_to)
+int		test0(char *nbr, char *base_from, char **dest_p)
 {
-	int i;
-	int n;
-	char *dest;
-
-	i = 0;
-	n = 0;
-	while(i < len(nbr))
-		n += fd(base_from, nbr[i]) * mypow(len(base_from), len(nbr) - i++ - 1);
-	dest = malloc(sizeof(*nbr) * lenght_nbr(n, len(base_to) + 1));
-	i = lenght_nbr(n, len(base_to) + 1);
-	while(n > 0)
+	while (*nbr != '\0')
 	{
-		dest[--i] = base_to[(n % len(base_to))];
-		n /= len(base_to);
+		if (*nbr != base_from[0])
+			return (1);
+		nbr++;
 	}
-	return (dest);
+	*dest_p = malloc(sizeof(*nbr) * 2);
+	dest_p[0][0] = '0';
+	dest_p[0][1] = '\0';
+	return (0);
 }
 
-/* Test ex06 */
-int main()
+char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
-	char nbr[] = "10";
-	char base_from[] = "0123456789";
-	char base_to[] = "0123456789ABCDEF";
+	int		i;
+	int		n;
+	char	*dest;
 
-	printf("%s\n", ft_convert_base(nbr, base_from, base_to));
-
-	return 0;
+	i = -1;
+	n = 0;
+	if (nbr[0] == '+' || nbr[0] == '-')
+		i++;
+	while (++i < ft(nbr, '0', 1))
+		n += ft(base_from, nbr[i], 0) * mypow(ft(base_from, '0', 1),
+			ft(nbr, '0', 1) - i - 1);
+	dest = malloc((ln(n, ft(base_to, '0', 1) + 1) + (int)(nbr[0] == '-')));
+	if (dest == NULL)
+		return (NULL);
+	i = ln(n, ft(base_to, '0', 1) + 1) + (int)(nbr[0] == '-');
+	dest[i] = '\0';
+	while (n > 0)
+	{
+		dest[--i] = base_to[(n % ft(base_to, '0', 1))];
+		n /= ft(base_to, '0', 1);
+	}
+	if (nbr[0] == '-')
+		dest[0] = '-';
+	test0(nbr, base_from, &dest);
+	return (dest);
 }

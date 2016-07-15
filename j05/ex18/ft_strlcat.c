@@ -10,14 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int ft_strlcat(char *dest, char *src, unsigned int size)
+#include <stdio.h>
+
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
 	unsigned int n;
 
 	n = 0;
 	while (*dest++ != '\0')
 		n++;
-	dest --;
+	dest--;
 	while (*src != '\0' && n++ < size - 1)
 		*dest++ = *src++;
 	while (*src++ != '\0')

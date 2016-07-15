@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char * ft_strcat(char *dest, char *src)
+char		*ft_strcat(char *dest, char *src)
 {
 	char *str;
 
-	str = dest; 
+	str = dest;
 	while (*str != '\0')
 		str++;
 	while (*src != '\0')
 		*str++ = *src++;
 	*str = '\0';
-	return (str);
+	return (dest);
 }

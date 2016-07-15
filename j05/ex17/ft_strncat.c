@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char * ft_strncat(char *dest, char *src, int nb)
+char	*ft_strncat(char *dest, char *src, int nb)
 {
 	char *str;
 

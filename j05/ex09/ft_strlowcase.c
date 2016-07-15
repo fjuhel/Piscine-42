@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_strlowcase(char *str)
+char		*ft_strlowcase(char *str)
 {
 	int i;
 

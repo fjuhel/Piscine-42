@@ -20,21 +20,23 @@ char	**get_grille(char **str);
 void	print_grille(char **str);
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
-int		check(char **p, int pos);
 int		solver(char **p, int pos, int *n);
+int		check(char **p, int pos);
 
 int main(int argc, char **argv)
 {
+	int		i;
+	int		j;
+	int		k;
 	int		n;
 	int		*n_p;
 	char	**grille;
 
 	n = 0;
 	n_p = &n;
-	grille = (get_grille(argv));
+	grille = get_grille(argv);
 	print_grille(grille);
 	solver(grille, 0, n_p);
-	print_grille(grille);
 	printf("%d\n", n);
 	return (0);
 }
@@ -49,21 +51,26 @@ int solver(char **p, int pos, int *n)
 	{
 		print_grille(p);
 		*n += 1;
-		return(1);
+		return(0);
 	}
 	k = 0;
 	row = pos / 9;
 	col = pos % 9;
 	if (p[row][col] != '.')
-		return (solver(p, pos + 1, n));
+	{
+		if (solver(p, pos + 1, n))
+			return (1);
+	}
 	else
 	{
 		while (++k < 10)
 		{
 			p[row][col] = k + '0';
 			if (check(p, pos))
+			{
 				if (solver(p, pos + 1, n))
 					return (1);
+			}
 		}
 		p[row][col] = '.';
 	}
@@ -86,17 +93,29 @@ int check(char **p, int pos)
 	block_h = col / 3 * 3;
 
 	while (++i < 9)
+	{
 		if ((p[row][i] == p[row][col] && i != col)
 			|| (p[i][col] == p[row][col] && i != row))
+			{
+				printf("LIGNE OU COLONNE pour placer row = %d | col = %d soit k = %c\n", row, col, p[row][col]);
+				print_grille(p);
 				return (0);
+			}
+	}
 	i = -1;
 	while (++i < 2)
 	{
 		j = -1;
 		while (++j < 2)
+		{
 			if ((block_v + i != row && block_h + j != col)
 				&& (p[block_v + i][block_h + j] == p[row][col]))
+			{
+				printf("BLOCK pour placer i = %d | j = %d soit k = %c\n", row, col, p[row][col]);
+				print_grille(p);
 				return (0);
+			}
+		}
 	}
 	return (1);
 }

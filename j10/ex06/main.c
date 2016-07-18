@@ -112,5 +112,7 @@ int main(int argc, char **argv)
 	else
 		ft_putnbr(ft_array[i](ft_atoi(argv[1]), ft_atoi(argv[3])));
 	ft_putchar('\n');
+	// Division par 0 à gérer.
+	// Modulo a ajouter.
 	return (0);
 }

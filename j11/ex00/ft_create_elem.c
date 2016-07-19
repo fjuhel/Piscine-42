@@ -9,6 +9,18 @@ t_list *ft_create_elem(void *data)
 	elem->next = NULL;
 }
 
+
+t_list *ft_create_elem(void *data)
+{
+	t_list *elem;
+
+	elem = malloc(sizeof(*elem) * 1);
+	elem->data = data;
+	elem->next = NULL;
+	return (elem);
+}
+
+
 #include <stdio.h>
 int main()
 {
@@ -17,3 +29,4 @@ int main()
 	printf("%s  %p\n", el->data, el->next);
 	return 0;
 }
+

@@ -125,6 +125,23 @@ t_list *ft_list_at(t_list *begin_list, unsigned int nbr)
 	return (0);
 }
 
+t_list *ft_list_at(t_list *begin_list, unsigned int nbr)
+{
+	int i;
+	int n;
+	// 0ème ou 1er ???
+	i = 0;
+	n = nbr;
+	while (begin_list && i <= n)
+	{
+		if (i == n)
+			return (begin_list);
+		begin_list = begin_list->next;
+		i++;
+	}
+	return (0);
+}
+
 ////////////////////////////////////////////////////////////////////
 
 int main(int argc, char **argv)

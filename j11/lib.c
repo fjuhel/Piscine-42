@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_sorted_list_merge.c                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/19 18:40:00 by fjuhel            #+#    #+#             */
-/*   Updated: 2016/07/19 18:40:03 by fjuhel           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ft_list.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,14 +24,11 @@ void	ft_print_list(t_list *list)
 	{
 		ft_putstr(list->data);
 		if (list->next)
-		{
 			ft_putstr(" -> ");
-		}
 		list = list->next;
 	}
 	ft_putchar('\n');
 }
-
 int		ft_strcmp(char *s1, char *s2)
 {
 	int i;
@@ -337,48 +322,3 @@ void	ft_sorted_list_insert(t_list **begin_list, void *data,int (*cmp)())
 		}
 	}
 }
-
-void	ft_sorted_list_merge(t_list **begin_list1, t_list *begin_list2,
-								int (*cmp)())
-{
-	t_list *tmp;
-	t_list *list_ptr;
-
-	list_ptr = *begin_list1;
-	while (list_ptr->next && begin_list2)
-	{
-		if ((*cmp)(list_ptr->data, begin_list2->data) < 0 &&
-			(*cmp)(list_ptr->next->data, begin_list2->data) >= 0)
-		{
-			tmp = begin_list2->next;
-			begin_list2->next = list_ptr->next;
-			list_ptr->next = begin_list2;
-			list_ptr = begin_list2;
-			begin_list2 = tmp;
-
-		}
-		else
-			list_ptr = list_ptr->next;
-	}
-	if (list_ptr->next == 0 && begin_list2 != 0)
-		list_ptr->next = begin_list2;
-}
-
-int main(int argc, char **argv)
-{
-	t_list *list1;
-	t_list *list2;
-
-	list1 = ft_list_push_params(argc - 1, ++argv);
-	list2 = ft_create_elem("11");
-	ft_list_push_back(&list2, "22");
-	ft_list_push_back(&list2, "33");
-	ft_list_push_back(&list2, "44");
-	ft_list_push_back(&list2, "55");
-	ft_print_list(list1);
-	ft_print_list(list2);
-	ft_sorted_list_merge(&list1, list2, &ft_strcmp);
-	ft_print_list(list1);
-	return (0);
-}
-

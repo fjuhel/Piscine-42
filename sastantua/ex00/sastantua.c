@@ -9,8 +9,36 @@
 /*   Updated: 2016/07/09 19:06:44 by fjuhel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
-void	ft_putchar(char c);
+int	ft_atoi(char *str)
+{
+	int	i;
+	int	neg;
+	int	n;
+
+	i = 0;
+	neg = 1;
+	n = 0;
+	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n')
+		|| (str[i] == '\v') || (str[i] == '\f') || (str[i] == '\r'))
+		i++;
+	if (str[i] == 45)
+		neg = -1;
+	if ((str[i] == 45) || (str[i] == 43))
+		i++;
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		n *= 10;
+		n += ((int)str[i] - 48);
+		i++;
+	}
+	return (n * neg);
+}
 
 int		brutforce_cols(int line)
 {
@@ -123,4 +151,10 @@ void	sastantua(int size)
 			line++;
 		}
 	}
+}
+
+int main(int argc, char **argv)
+{
+	sastantua(ft_atoi(argv[1]));
+	return (0);
 }

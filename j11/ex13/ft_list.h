@@ -21,6 +21,6 @@ struct			s_list
 	t_list		*next;
 };
 
-void	ft_list_merge(t_list **begin_list1, t_list *begin_list2);
+void			ft_list_merge(t_list **begin_list1, t_list *begin_list2);
 
 #endif

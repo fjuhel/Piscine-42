@@ -1,118 +1,76 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/18 14:42:11 by fjuhel            #+#    #+#             */
+/*   Updated: 2016/07/18 14:42:12 by fjuhel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef int (*ft)(int, int);
-
-int	ft_atoi(char *str)
-{
-	int	i;
-	int	neg;
-	int	n;
-
-	i = 0;
-	neg = 1;
-	n = 0;
-	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n')
-		|| (str[i] == '\v') || (str[i] == '\f') || (str[i] == '\r'))
-		i++;
-	if (str[i] == 45)
-		neg = -1;
-	if ((str[i] == 45) || (str[i] == 43))
-		i++;
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		n *= 10;
-		n += ((int)str[i] - 48);
-		i++;
-	}
-	return (n * neg);
-}
-
-int		ft_num(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (!(str[i] > 47 && str[i] < 58))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putnbr(int nb)
-{
-	unsigned int n;
-
-	n = nb;
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		n = -nb;
-	}
-	if (n > 9)
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-	}
-	else
-	{
-		ft_putchar(n + '0');
-	}
-}
-
-int add(int a, int b)
-{
-	return (a + b);
-}
-
-int sub(int a, int b)
-{
-	return (a - b);
-}
-
-int mul(int a, int b)
-{
-	return (a * b);
-}
-
-int div(int a, int b)
-{
-	return (a / b);
-}
-
+#include "main.h"
 #include <stdio.h>
-int main(int argc, char **argv)
-{
-	int i;
-	char operateur[4];
-	ft ft_array[4];
 
-	ft_array[0] = add;
-	ft_array[1] = sub;
-	ft_array[2] = mul;
-	ft_array[3] = div;
-	operateur[0] = '+';
-	operateur[1] = '-';
-	operateur[2] = '*';
-	operateur[3] = '/';
-	i = 0;
-	if (argc != 4)
+t_ft	*ft_array(void)
+{
+	static t_ft farray[5];
+
+	farray[0] = add;
+	farray[1] = sub;
+	farray[2] = mul;
+	farray[3] = div;
+	farray[4] = mod;
+	return (farray);
+}
+
+char	*operateur_array(void)
+{
+	static char op[5];
+
+	op[0] = '+';
+	op[1] = '-';
+	op[2] = '*';
+	op[3] = '/';
+	op[4] = '%';
+	return (op);
+}
+
+int		test_div_mod(int b, char op)
+{
+	if (b == 0 && op == '/')
+	{
+		ft_putstr("Stop : division by zero\n");
 		return (1);
-	while (operateur[i] != argv[2][0] && i < 4)
+	}
+	else if (b == 0 && op == '%')
+	{
+		ft_putstr("Stop : modulo by zero\n");
+		return (1);
+	}
+	return (0);
+}
+
+int		main(int argc, char **argv)
+{
+	int		i;
+	t_ft	*functions;
+	char	*operateurs;
+
+	i = 0;
+	functions = ft_array();
+	operateurs = operateur_array();
+	if (argc != 4 || test_div_mod(ft_atoi(argv[3]), argv[2][0]))
+		return (1);
+	while (operateurs[i] != argv[2][0] && i < 4)
 		i++;
 	if (argv[2][1] != '\0' || i > 3)
 		ft_putchar('0');
 	else
-		ft_putnbr(ft_array[i](ft_atoi(argv[1]), ft_atoi(argv[3])));
+	{
+		ft_putnbr(functions[i](ft_atoi(argv[1]), ft_atoi(argv[3])));
+	}
 	ft_putchar('\n');
-	// Division par 0 à gérer.
-	// Modulo a ajouter.
 	return (0);
 }

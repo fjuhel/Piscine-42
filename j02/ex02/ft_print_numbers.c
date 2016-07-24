@@ -9,8 +9,11 @@
 /*   Updated: 2016/07/07 13:47:11 by fjuhel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-void	ft_putchar(char c);
+#include <unistd.h>
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
 void	ft_print_numbers(void)
 {
@@ -22,4 +25,11 @@ void	ft_print_numbers(void)
 		ft_putchar(i);
 		i++;
 	}
+}
+
+int main(int argc, char **argv)
+{
+	ft_print_numbers();
+	ft_putchar('e');
+	return (0);
 }

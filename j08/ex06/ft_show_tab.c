@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_stock_par.h"
-#include <unistd.h>
 
 void	ft_putstr(char *str)
 {
@@ -47,22 +46,21 @@ void	ft_putnbr(int nb)
 	}
 }
 
+void	ft_print_words(char **tab)
+{
+	while (tab)
+		ft_putstr(*tab++);
+}
+
 void	ft_show_tab(struct s_stock_par *par)
 {
-	int i;
-
 	while (par->str != 0)
 	{
 		ft_putstr(par->str);
 		ft_putnbr(par->size_param);
 		ft_putchar('\n');
-		ft_print_words(par->tab);
-		i = 0;
-		while (par->tab[i] != 0 && par->tab != 0)
-		{
-			ft_putstr(par->tab[i]);
-			i++;
-		}
+		while (*(par->tab))
+			ft_putstr(*(par->tab++));
 		par++;
 	}
 }

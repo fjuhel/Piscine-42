@@ -10,20 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIST_H
-# define LIST_H
+#ifndef FT_LIST_H
+# define FT_LIST_H
 
-typedef	struct s_list t_list;
+typedef	struct s_list	t_list;
 
- struct s_list
+struct			s_list
 {
-	char	*data;
-	t_list	*next;
+	char		*data;
+	t_list		*next;
 };
 
-void	ft_sorted_list_merge(t_list **begin_list1, t_list *begin_list2,
-								int (*cmp)());
+void			swap(t_list **list1, t_list **list2, int debut);
+void			ft_sorted_list_insert(t_list **begin_list,
+										void *data, int (*cmp)());
 
 #endif
-
-

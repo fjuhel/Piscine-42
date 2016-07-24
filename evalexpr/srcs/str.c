@@ -69,10 +69,25 @@ int		ft_atoi(char *str)
 	return (n * neg);
 }
 
-int	ft_is_num(char *str)
+char	*ft_itoa(int i)
 {
-	while (*str)
-		if (!(*str >= '0' && *str <= '9'))
-			return (0);
-	return (1);
+	static char	buf[21];
+	char		*p;
+
+	p = buf + 20;
+	if (i == 0)
+	{
+		p = "0";
+		return (p);
+	}
+	else
+	{
+		while (i != 0)
+		{
+			*--p = '0' + (i % 10);
+			i /= 10;
+		}
+		return (p);
+	}
+	return (p);
 }

@@ -12,13 +12,30 @@
 
 #include "ft_list.h"
 
+int		ft_list_size(t_list *begin_list)
+{
+	int n;
+
+	n = 0;
+	if (!(begin_list))
+		return (0);
+	if (!(begin_list->next))
+		return (1);
+	while (begin_list)
+	{
+		n++;
+		begin_list = begin_list->next;
+	}
+	return (n);
+}
+
 void	ft_list_reverse_fun(t_list *begin_list)
 {
 	int		i;
 	int		j;
 	int		size;
 	void	*tmp;
-	t_list 		*debut;
+	t_list	*debut;
 
 	debut = begin_list;
 	i = -1;

@@ -1,22 +1,20 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_foreach.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/18 14:41:08 by fjuhel            #+#    #+#             */
+/*   Updated: 2016/07/18 14:41:09 by fjuhel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void ft_foreach(int *tab, int length, void(*f)(int))
+void	ft_foreach(int *tab, int length, void (*f)(int))
 {
 	int i;
 
 	i = 0;
 	while (i < length)
 		f(tab[i++]);
-}
-
-void pr(int n)
-{
-	printf("%d\n", n);
-}
-
-int main()
-{
-	int tab[5] = {1, 2, 5, 4, 3};
-	ft_foreach(tab, 5, &pr);
-	return 0;
 }

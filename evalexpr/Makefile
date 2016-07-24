@@ -12,13 +12,11 @@
 
 NAME = eval_expr
 
-SRC = srcs/main.c srcs/eval_expr.c \
-	  srcs/str.c srcs/ft_split_whitespaces.c \
-	  srcs/list.c
+SRC = srcs/main.c srcs/eval_expr.c srcs/algorithm.c \
+	  srcs/str.c srcs/list.c
 
-OBJ = main.o eval_expr.o \
-	  str.o ft_split_whitespaces.o \
-	  list.o
+OBJ = main.o eval_expr.o algorithm.o \
+	  str.o list.o
 
 INC = includes/
 

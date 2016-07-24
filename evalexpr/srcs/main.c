@@ -6,7 +6,7 @@
 /*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/22 23:16:39 by fjuhel            #+#    #+#             */
-/*   Updated: 2016/07/22 23:16:40 by fjuhel           ###   ########.fr       */
+/*   Updated: 2016/07/24 20:47:02 by fjuhel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ int		main(int ac, char **av)
 		ft_putnbr(eval_expr(av[1]));
 		ft_putchar('\n');
 	}
-	return(0);
+	return (0);
 }

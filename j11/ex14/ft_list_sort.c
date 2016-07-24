@@ -12,7 +12,7 @@
 
 #include "ft_list.h"
 
-int	ft_list_size(t_list *begin_list)
+int		ft_list_size(t_list *begin_list)
 {
 	int n;
 
@@ -29,14 +29,13 @@ int	ft_list_size(t_list *begin_list)
 	return (n);
 }
 
-
 void	ft_list_sort(t_list **begin_list, int (*cmp)())
 {
 	int		i;
 	int		j;
 	int		size;
 	void	*tmp;
-	t_list *list_ptr;
+	t_list	*list_ptr;
 
 	i = -1;
 	list_ptr = *begin_list;

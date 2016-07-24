@@ -15,7 +15,7 @@
 void	ft_list_merge(t_list **begin_list1, t_list *begin_list2)
 {
 	t_list *maillon;
-	
+
 	if (*begin_list1 == 0 && begin_list2 != 0)
 		*begin_list1 = begin_list2;
 	else if (begin_list2 != 0)

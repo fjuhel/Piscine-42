@@ -12,8 +12,7 @@
 
 #ifndef FT_STOCK_PAR_H
 # define FT_STOCK_PAR_H
-
-#include <stdlib.h>
+# include <stdlib.h>
 
 char			**ft_split_whitespaces(char *str);
 void			ft_show_tab(struct s_stock_par *par);

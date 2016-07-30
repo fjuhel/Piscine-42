@@ -67,7 +67,9 @@ int		get_width(char *str)
 {
 	int n;
 
+	printf("D:%s\n", str);
 	n = 0;
+	str++;
 	while (*str++ != '\n')
 		n++;
 	return (n);

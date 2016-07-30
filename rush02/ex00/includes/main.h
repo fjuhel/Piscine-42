@@ -14,6 +14,7 @@
 # define MAIN_H
 # include <unistd.h>
 # include <stdlib.h>
+#include <stdio.h>
 
 typedef char *(*t_ft)(int, int);
 

@@ -38,6 +38,8 @@ int		print_if(char *input, t_ft *colles, int i, int prev)
 	width = get_width(input);
 	height = get_height(input);
 	data_ref = colles[i](width, height);
+	printf("\nlargeur = %d, hauteur = %d\ndata ref = \n%s", width, height, data_ref);
+	//printf("Input:%s\n", input);
 	if (ft_strcmp(input, data_ref) == 0)
 	{
 		if (prev != 0)
@@ -58,19 +60,23 @@ int		print_if(char *input, t_ft *colles, int i, int prev)
 
 char	*get_input(void)
 {
-	int		pos;
-	int		len;
-	char	buff[BUFFER_SIZE];
-	t_list	*list;
+	char all[4000096];
+	char buffer;
+	char *p;
+	char *d;
+	int len;
+	int pos;
 
 	len = 0;
-	while ((pos = read(0, buff, BUFFER_SIZE)))
+	p = all;
+	d = all;
+	while ((pos = read(0, &buffer, 1) > 0))
 	{
-		buff[pos] = '\0';
 		len += pos;
-		ft_list_push_back(&list, buff);
+		*p++ = buffer;
 	}
-	return (list_to_str(list, len));
+	printf("%s\n", d);
+	return (d);
 }
 
 int		main(void)
@@ -89,6 +95,7 @@ int		main(void)
 	}
 	else
 	{
+		printf("Input:%s\n", input);
 		while (i < 5)
 			if (prev == 0)
 				prev = print_if(input, colles, i++, prev);

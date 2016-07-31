@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_int_tab.c                                     :+:      :+:    :+:   */
+/*   list_h.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjuhel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/28 19:53:19 by fjuhel            #+#    #+#             */
-/*   Updated: 2016/07/28 19:53:20 by fjuhel           ###   ########.fr       */
+/*   Created: 2016/07/11 12:40:00 by fjuhel            #+#    #+#             */
+/*   Updated: 2016/07/11 12:40:02 by fjuhel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void sort_int_tab(int *tab, unsigned int size)
-{
-	unsigned int i;
-	unsigned int j;
-	int tmp;
+#ifndef FT_LIST_H
+# define FT_LIST_H
 
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size - 1)
-		{
-			if (tab[j] > tab[j + 1])
-			{
-				tmp = tab[j];
-				tab[j] = tab[j + 1];
-				tab[j + 1] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
+typedef struct    s_list
+{
+	struct s_list *next;
+	void          *data;
+}                 t_list;
+
+int	ft_list_size(t_list *begin_list);
+
+#endif
